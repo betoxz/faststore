@@ -1,0 +1,353 @@
+{
+   "swagger" : "2.0" , "info" : {
+   
+      "version" : "v1" , "title" : "Fast Shop Store"
+      
+   } , "basePath" : "/" , "caminhos" : {
+   
+   
+      "/ api / Cliente / v1 / clientes / {cpf}" : {
+         "get" : {
+            "tags" : [
+               "Cliente"
+            ] , "operationId" : "ApiClienteV1ClientesByCpfGet" , "consome" : [
+            
+            
+
+            ] , "produz" : [
+            
+               "text / plain" , "application / json" , "text / json"
+               
+               
+            ] , "parâmetros" : [
+            
+               {}
+            ] , "respostas" : {
+            
+               "200" : {
+                  "description" : "Success" , "schema" : {
+                  
+                     "$ ref" : "# / settings / GetClienteQueryResult"
+                  }
+               }
+            }
+         }
+      } , "/ api / Pedido / v1 / pedido / {id}" : {
+      
+         "get" : {
+            "tags" : [
+               "Pedido"
+            ] , "operationId" : "ApiPedidoV1PedidoByIdGet" , "consome" : [
+            
+            
+
+            ] , "produz" : [
+            
+               "text / plain" , "application / json" , "application / json" , "text / json"
+               
+               
+               
+            ] , "parâmetros" : [
+            
+               {
+                  "name" : "id" , "in" : "path" , "required" : true , "type" : "integer" , "format" : "int32"
+                  
+                  
+                  
+                  
+               }
+            ] , "respostas" : {
+            
+               "200" : {
+                  "description" : "Success" , "schema" : {
+                  
+                     "$ ref" : "# / settings / GetPedidoQueryResult"
+                  }
+               }
+            }
+         } , "/ api / Pedido / v1 / pedidos / {id} / itens" : {
+         
+            "get" : {
+               "tags" : [
+                  "Pedido"
+               ] , "operationId" : "ApiPedidoV1PedidosByIdItensGet" , "consome" : [
+               
+               
+
+               ] , "produz" : [
+               
+                  "text / plain" , "aplicativo / json" , "text / json"
+                  
+                  
+               ] , "parâmetros" : [
+               
+                  {
+                     "name" : "id" , "in" : "path" , "required" : true , "type" : "integer" , "format" : "int32"
+                     
+                     
+                     
+                     
+                  }
+               ] , "respostas" : {
+               
+                  "200" : {
+                     "description" : "Success" , "schema" : {
+                     
+                        "type" : "array" , "items" : {
+                        
+                           "$ ref" : "# / settings / ListItensPedidoQueryResult"
+                        }
+                     }
+                  }
+               }
+            }
+         } , "/ api / Pedido / v1 / pedido" : {
+         
+            "postagem" : {
+               "tags" : [
+                  "Pedido"
+               ] , "operationId" : "ApiPedidoV1PedidoPost" , "consome" : [
+               
+               
+                  "application / json-patch + json" , "application / json" , "text / json" , "application / * + json"
+                  
+                  
+                  
+               ] , "produz" : [
+               
+                  "text / plain" , "application / json" , "text / json"
+                  
+                  
+               ] , "parâmetros" : [
+               
+                  {
+                     "name" : "command" , "in" : "body" , "required" : false , "schema" : {
+                     
+                     
+                     
+                        "$ ref" : "# / settings / AlteraStatusPedidoCommand"
+                     }
+                  }
+               ] , "respostas" : {
+               
+                  "200" : {
+                     "description" : "Success" , "schema" : {
+                     
+                        "$ ref" : "# / settings / ICommandResult"
+                     }
+                  }
+               }
+            }
+         }
+      } , "configurações" : {
+      
+         "GetClienteQueryResult" : {
+            "type" : "object" , "properties" : {
+            
+               "id" : {
+                  "formato" : "int32" , "tipo" : "número inteiro"
+                  
+               } , "nome" : {
+               
+                  "type" : "string"
+               } , "cpf" : {
+               
+                  "type" : "string"
+               }
+            }
+         } , "GetPedidoQueryResult" : {
+         
+            "type" : "object" , "properties" : {
+            
+               "id" : {
+                  "format" : "int32" , "type" : "número inteiro"
+                  
+               } , "idCliente" : {
+               
+                  "formato" : "int32" , "tipo" : "número inteiro"
+                  
+               } , "criadoEm" : {
+               
+                  "formato" : "data e hora" , "tipo" : "cadeia"
+                  
+               } , "status" : {
+               
+                  "formato" : "int32" , "tipo" : "número inteiro"
+                  
+               } , "cliente" : {
+               
+                  "type" : "string"
+               } , "quantidadeTotal" : {
+               
+                  "formato" : "duplo" , "digite" : "número"
+                  
+               } , "valorTotal" : {
+               
+                  "format" : "double" , "type" : "number"
+                  
+               }
+            }
+         } , "ListItensPedidoQueryResult" : {
+         
+            "type" : "object" , "properties" : {
+            
+               "id" : {
+                  "formato" : "int32" , "tipo" : "número inteiro"
+                  
+               } , "descrição" : {
+               
+                  "type" : "string"
+               } , "quantidade" : {
+               
+                  "formato" : "int32" , "tipo" : "número inteiro"
+                  
+               } , "preco" : {
+               
+                  "formato" : "duplo" , "tipo" : "número"
+                  
+               } , "total" : {
+               
+                  "formato" : "duplo" , "tipo" : "número"
+                  
+               }
+            }
+         } , "AlteraStatusPedidoCommand" : {
+         
+            "type" : "object" , "properties" : {
+            
+               "idPedido" : {
+                  "formato" : "int32" , "tipo" : "número inteiro"
+                  
+               } , "status" : {
+               
+                  "formato" : "int32" , "enum" : [
+                  
+                     1 , 2 , 3 , 4
+                     
+                     
+                     
+                  ] , "type" : "integer"
+                  
+               } , "dataAtualizacao" : {
+               
+                  "format" : "date-time" , "type" : "string"
+                  
+               } , "Notificações" : {
+               
+                  "type" : "array" , "items" : {
+                  
+                     "$ ref" : "# / settings / Notification"
+                  } , "readOnly" : true
+                  
+               } , "inválido" : {
+               
+                  "type" : "booleano" , "readOnly" : true
+                  
+               } , "isValid" : {
+               
+                  "type" : "booleano" , "readOnly" : true
+                  
+               }
+            }
+         } , "Notificação" : {
+         
+            "type" : "object" , "properties" : {
+            
+               "propriedade" : {
+                  "type" : "string" , "readOnly" : true
+                  
+               } , "mensagem" : {
+               
+                  "type" : "string" , "readOnly" : true
+                  
+               }
+            }
+         } , "ICommandResult" : {
+         
+            "type" : "object" , "properties" : {
+            
+               "sucesso" : {
+                  "type" : "boolean"
+               } , "mensagem" : {
+               
+                  "type" : "string"
+               } , "dados" : {
+               
+                  "type" : "object"
+               }
+            }
+         }
+      } , "securityDefinitions" : {
+      
+
+      }
+   }   "readOnly"   ": true}}},"   "Notification"   ": {"   "type"   ":"   "object"   ","   "properties"   ": {"   "property"   ": {"   "type"   ":"   "string"   ","   "readOnly"   ": true},"   "message"   ": {"   "type"   ": "   "string"   ", "   "readOnly"   ": true}}}, "   "ICommandResult"   ": {"   "type"   ": "   "object"   ", "   "properties"   ": {"   "success"   ": {"   "type"   ": "   "boolean"   "}, "   "message"   ": {"   "type"   ": "   "string"   "}, "   "data"   ": {"   "type"   ": "   "object"   "}}}}, "   "securityDefinitions"   ": {}}readOnly ":true
+}
+}
+},
+" Notification ":{
+   " type ":" object ",
+   " properties ":{
+      " property ":{
+         " type ":" string ",
+         " readOnly ":true
+      },
+      " message ":{
+         "type":"string",
+         "readOnly":true
+      }
+   }
+},
+"ICommandResult":{
+   "type":"object",
+   "properties":{
+      "success":{
+         "type":"boolean"
+      },
+      "message":{
+         "type":"string"
+      },
+      "data":{
+         "type":"object"
+      }
+   }
+} 
+} , 
+"securityDefinitions" : {
+
+} 
+} "ICommandResult" : {
+   "type" : "object" , "properties" : {
+   
+      "sucesso" : {
+         "type" : "boolean"
+      } , "mensagem" : {
+      
+         "type" : "string"
+      } , "dados" : {
+      
+         "type" : "object"
+      }
+   }
+} 
+} , 
+"securityDefinitions" : {
+
+} 
+} "ICommandResult" : {
+   "type" : "object" , "properties" : {
+   
+      "sucesso" : {
+         "type" : "boolean"
+      } , "mensagem" : {
+      
+         "type" : "string"
+      } , "dados" : {
+      
+         "type" : "object"
+      }
+   }
+} 
+} , 
+"securityDefinitions" : {} 
+}

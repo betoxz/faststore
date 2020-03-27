@@ -1,0 +1,5 @@
+Para visualizar a documentação da Api abra o arquivo DocumentacaoApi.js 
+
+ou
+
+abra o link https://localhost:5001/swagger apos a api estiver em execucao

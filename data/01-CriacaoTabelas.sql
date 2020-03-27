@@ -1,0 +1,45 @@
+USE FastShopDB;
+
+CREATE TABLE IF NOT EXISTS `Produtos` (
+ 
+`Id` INT NOT NULL AUTO_INCREMENT,
+`Descricao` VARCHAR(255) NOT NULL,
+`Status` 	INT DEFAULT 1,
+`Preco` 	DECIMAL(10,2) DEFAULT 0,
+PRIMARY KEY (Id)
+) ENGINE = innodb;
+
+CREATE TABLE IF NOT EXISTS `Clientes` (
+ 
+`Id` INT NOT NULL AUTO_INCREMENT,
+`Nome` VARCHAR(255) NOT NULL,
+`Cpf` VARCHAR(20) NOT NULL,
+PRIMARY KEY (Id)
+) ENGINE = innodb;
+
+	
+CREATE TABLE IF NOT EXISTS `Pedidos` (
+`Id` 		 INT NOT NULL AUTO_INCREMENT,
+`CreateAt` 	 DATETIME NOT NULL,
+`UpdateAt` 	 DATETIME NULL,
+`Status` 	 INT DEFAULT 1,
+`Id_Cliente` INT NOT NULL,
+PRIMARY KEY (Id),
+FOREIGN KEY (Id_Cliente) REFERENCES Clientes(Id)
+ 
+) ENGINE = innodb;
+
+CREATE TABLE IF NOT EXISTS `ItensPedido` (
+
+`Id` 		 	INT NOT NULL AUTO_INCREMENT,
+`CreateAt` 	 	DATETIME NOT NULL,
+`UpdateAt` 	 	DATETIME NULL,
+`Quantidade` 	DECIMAL(10,2) DEFAULT 0,
+`Preco` 		DECIMAL(10,2) DEFAULT 0,
+`Id_Pedido` 	INT NOT NULL,
+`Id_Produto` 	INT NOT NULL,
+PRIMARY KEY (Id),
+FOREIGN KEY (Id_Pedido) REFERENCES Pedidos(Id),
+FOREIGN KEY (Id_Produto) REFERENCES Produtos(Id)
+ 
+) ENGINE = innodb; 

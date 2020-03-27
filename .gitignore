@@ -3,3 +3,12 @@
 ################################################################################
 
 /src/backend/Pedidos.Domain/bin/Debug
+/src/backend/Pedidos.Domain/obj/Debug
+/src/backend/Pedidos.Domain/obj
+/src/backend/Pedidos.Infra/bin/Debug
+/src/backend/Pedidos.Infra/obj
+/src/backend/Pedidos.Infra/Scripts/CriacaoTabelas.sql
+/src/backend/Pedidos.Shared/bin/Debug
+/src/backend/Pedidos.Shared/obj
+/src/backend/Pedidos.WebAPI/obj
+/src/backend/PedidoTestes/obj
