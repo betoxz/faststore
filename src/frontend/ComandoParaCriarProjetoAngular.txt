@@ -1,0 +1,6 @@
+ng new pedidosApp
+escolher tipo de stilo
+
+
+docker pull mysql
+

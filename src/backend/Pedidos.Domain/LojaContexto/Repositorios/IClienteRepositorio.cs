@@ -8,6 +8,9 @@ namespace Pedidos.Domain.LojaContexto.Repositorios
 {
     public interface IClienteRepositorio
     {
-        GetClienteQueryResult Get(string cpf);
+        IEnumerable<ListClienteQueryResult> Get(string cpf);
+
+        IEnumerable<ListClienteQueryResult> GetClientes();
+
     }
 }

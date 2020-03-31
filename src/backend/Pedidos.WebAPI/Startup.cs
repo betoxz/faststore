@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pedidos.Domain.LojaContexto.Handlers;
@@ -24,7 +25,11 @@ namespace Pedidos.WebAPI
 
             Configuration = builder.Build();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddResponseCompression();
             services.AddScoped<DataContext, DataContext>();
@@ -46,6 +51,11 @@ namespace Pedidos.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:4200").WithOrigins("https://localhost:5001").AllowAnyMethod()
+                );
+
             app.UseMvc();
 
             app.UseResponseCompression();

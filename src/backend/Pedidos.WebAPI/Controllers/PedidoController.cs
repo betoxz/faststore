@@ -22,10 +22,16 @@ namespace Pedidos.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("v1/pedido/{id}")]
-        public GetPedidoQueryResult GetById(int id)
+        [Route("v1/pedidos/{id}")]
+        public IEnumerable<ListPedidoQueryResult> GetById(int id)
         {
             return _repositorio.GetPedido(id);
+        }
+        [HttpGet]
+        [Route("v1/pedidos")]
+        public IEnumerable<ListPedidoQueryResult> GetPedidos()
+        {
+            return _repositorio.GetPedidos();
         }
 
         [HttpGet]

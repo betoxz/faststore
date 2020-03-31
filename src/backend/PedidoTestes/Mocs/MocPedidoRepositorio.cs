@@ -44,6 +44,11 @@ namespace PedidoTestes.Mocs
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ListPedidoQueryResult> GetPedidos()
+        {
+            throw new NotImplementedException();
+        }
+
         public Pedido LocalizarPedido(int idPedido)
         {
             return listaP.Where(x => x.Id == idPedido).LastOrDefault();
@@ -55,6 +60,11 @@ namespace PedidoTestes.Mocs
         }
 
         IEnumerable<ListItensPedidoQueryResult> IPedidoRepositorio.GetItensPedido(int IdPedido)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<ListPedidoQueryResult> IPedidoRepositorio.GetPedido(int Id)
         {
             throw new NotImplementedException();
         }

@@ -2,6 +2,7 @@
 using Pedidos.Domain.LojaContexto.Queries;
 using Pedidos.Domain.LojaContexto.Repositorios;
 using Pedidos.Infra.LojaContexto.DataContexts;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Pedidos.Infra.LojaContexto.Repositorios
@@ -16,15 +17,23 @@ namespace Pedidos.Infra.LojaContexto.Repositorios
         }
 
         // Módulo Pedidos - Localizar Cliente por CPF;
-        public GetClienteQueryResult Get(string cpf)
+        public IEnumerable<ListClienteQueryResult> Get(string cpf)
         {
             return
                 _context
                 .Connection
-                .Query<GetClienteQueryResult>(@" Select Id, Nome , Cpf
+                .Query<ListClienteQueryResult>(@" Select Id, Nome , Cpf
                                                 FROM Clientes 
-                                                WHERE Cpf = @Cpf", new { cpf })
-                                                                .LastOrDefault();
+                                                WHERE Cpf = @Cpf", new { cpf });
+        }
+
+        public IEnumerable<ListClienteQueryResult> GetClientes()
+        {
+            return
+                _context
+                .Connection
+                .Query<ListClienteQueryResult>(@" Select Id, Nome , Cpf
+                                                FROM Clientes", new { });
         }
     }
 }

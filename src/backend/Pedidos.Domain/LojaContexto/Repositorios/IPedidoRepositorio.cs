@@ -8,8 +8,9 @@ using System.Text;
 namespace Pedidos.Domain.LojaContexto.Repositorios
 {
     public interface IPedidoRepositorio
-    {        
-        GetPedidoQueryResult GetPedido(int Id);
+    {
+        IEnumerable<ListPedidoQueryResult> GetPedido(int Id);
+        IEnumerable<ListPedidoQueryResult> GetPedidos();
 
         void AlteraStatusPedido(int Id, EnumPedidoStatus Status);
 

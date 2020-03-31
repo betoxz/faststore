@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pedidos.Domain.LojaContexto.Queries;
 using Pedidos.Domain.LojaContexto.Repositorios;
+using System.Collections.Generic;
 
 namespace Pedidos.WebAPI.Controllers
 {
@@ -16,9 +17,16 @@ namespace Pedidos.WebAPI.Controllers
 
         [HttpGet]
         [Route("v1/clientes/{cpf}")]
-        public GetClienteQueryResult GetByCpf(string cpf)
+        public IEnumerable<ListClienteQueryResult> GetByCpf(string cpf)
         {
             return _repositorio.Get(cpf);
+        }
+
+        [HttpGet]
+        [Route("v1/clientes")]
+        public IEnumerable<ListClienteQueryResult> GetClientes()
+        {
+            return _repositorio.GetClientes();
         }
     }
 }

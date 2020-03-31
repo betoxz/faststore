@@ -25,9 +25,19 @@ namespace PedidoTestes.Mocs
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ListClienteQueryResult> GetClientes()
+        {
+            throw new NotImplementedException();
+        }
+
         public Cliente LocalizarClientePorCpf(string cpf)
         {
             return lista.Where(x => x.Cpf == cpf).FirstOrDefault();
+        }
+
+        IEnumerable<ListClienteQueryResult> IClienteRepositorio.Get(string cpf)
+        {
+            throw new NotImplementedException();
         }
     }
 }

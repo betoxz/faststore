@@ -21,17 +21,16 @@ namespace Pedidos.Infra.LojaContexto.Repositorios
         }
 
         //Localizar pedido;
-        public GetPedidoQueryResult GetPedido(int Id)
+        public IEnumerable<ListPedidoQueryResult> GetPedido(int Id)
         {
             return
                 _context
                 .Connection
-                .Query<GetPedidoQueryResult>(@" Select C.Id, Id_Cliente as IdCliente , CreateAt CriadoEm,Status, C.Nome as Cliente, 0 QuantidadeTotal, 0 ValorTotal
+                .Query<ListPedidoQueryResult>(@" Select C.Id, Id_Cliente as IdCliente , CreateAt CriadoEm,Status, C.Nome as Cliente, 0 QuantidadeTotal, 0 ValorTotal
                                                 FROM Pedidos P
                                                 INNER JOIN Clientes C
                                                 On C.Id = P.id_Cliente
-                                                WHERE P.id = @Id", new { Id })
-                                                                .LastOrDefault();
+                                                WHERE P.id = @Id", new { Id });
         }
 
         //Listar os itens do pedido;
@@ -53,6 +52,17 @@ namespace Pedidos.Infra.LojaContexto.Repositorios
             _context
             .Connection.Query("UPDATE Pedidos SET Status = @Status"
                         + " WHERE Id = @Id", new { Status, Id });
+        }
+
+        public IEnumerable<ListPedidoQueryResult> GetPedidos()
+        {
+            return
+             _context
+             .Connection
+             .Query<ListPedidoQueryResult>(@" Select C.Id, Id_Cliente as IdCliente , CreateAt CriadoEm,Status, C.Nome as Cliente, 0 QuantidadeTotal, 0 ValorTotal
+                                                FROM Pedidos P
+                                                INNER JOIN Clientes C
+                                                On C.Id = P.id_Cliente ", new { });
         }
     }
 }
