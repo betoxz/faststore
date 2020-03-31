@@ -15,3 +15,5 @@ dotnet run
 
 
 Instruções para Executar o FrontEnd
+entrar na pasta src\frontend\pedidosApp e executar o comando ng server -o
+
