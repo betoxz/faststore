@@ -24,8 +24,7 @@
       <div class="form-group">
         <label>Status</label>
         <select formControlName="status" class="form-control">
-          <option *ngFor="let status of listaStatus" [ngValue]="ped" [selected]="status.id==ped.status"
-            value={{status.id}}>
+          <option *ngFor="let status of listaStatus" value={{status.id}}>
             {{status.descricao}}
           </option>
         </select>

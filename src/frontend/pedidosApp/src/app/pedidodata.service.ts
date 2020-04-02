@@ -58,14 +58,6 @@ export class PedidoDataService {
       )
   }
 
-
-  /*
-  public markAsDone(data) {
-    return this.http.put(`${this.baseUrl}/v1/todos/mark-as-done`, data });
-  }
-
-  */
-
   errorHandler(error) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

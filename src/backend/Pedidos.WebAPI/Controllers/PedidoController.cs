@@ -45,7 +45,7 @@ namespace Pedidos.WebAPI.Controllers
 
         [HttpPut]
         [Route("v1/pedido")]
-        public ICommandResult Post([FromBody]AlteraStatusPedidoCommand command)
+        public ICommandResult Put([FromBody]AlteraStatusPedidoCommand command)
         {
             var result = (AlteraStatusPedidoCommandResult)_handler.Handle(command);
             return result;

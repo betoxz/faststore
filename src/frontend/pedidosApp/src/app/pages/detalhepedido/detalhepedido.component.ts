@@ -30,11 +30,20 @@ export class DetalhepedidoComponent implements OnInit {
     });
   }
 
+  setDefaultValues() {
+    var p = this.pedido$.subscribe(res => {
+      if (res) {
+        this.form.patchValue({ status: res[0].status });
+      }
+    });
+  }
+
   ngOnInit(): void {
 
     this.pedido$ = this.service.getPedido(this.activatedRoute.snapshot.params.id);
     this.itens$ = this.service.getPedidoItens(this.activatedRoute.snapshot.params.id);
     this.listaStatus = this.getStatus();
+    this.setDefaultValues();
   }
 
   getStatus() {
@@ -47,7 +56,6 @@ export class DetalhepedidoComponent implements OnInit {
   }
 
   salvar(): void {
-
     const data = {
       IdPedido: this.activatedRoute.snapshot.params.id,
       Status: this.form.value.status
