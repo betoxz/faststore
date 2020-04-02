@@ -53,7 +53,7 @@ namespace Pedidos.WebAPI
             }
 
             app.UseCors(
-                options => options.WithOrigins("http://localhost:4200").WithOrigins("https://localhost:5001").AllowAnyMethod()
+                options => options.WithOrigins("http://localhost:4200").WithOrigins("https://localhost:5001").AllowAnyMethod().AllowAnyHeader()
                 );
 
             app.UseMvc();

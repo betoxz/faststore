@@ -3,6 +3,7 @@
   <span class="input-group-addon" (click)="pesquisar(txt_pedido.value)"><i
       class="glyphicon glyphicon-search"></i></span>
 </div>
+
 <h1>Lista de Pedidos</h1>
 <table class="table table-sm table-hover" *ngIf="(pedidos$ | async)?.length> 0 ">
   <thead>
@@ -14,6 +15,7 @@
       <th>Quantidade Total</th>
       <th>Valor Total</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -21,13 +23,11 @@
       <td>{{ ped.id }}</td>
       <td>{{ ped.cliente }}</td>
       <td>{{ ped.criadoEm | date: 'dd/MM/yyyy' }}</td>
-      <td class="text-center">{{ ped.status }}</td>
+      <td class="text-center">{{ ped.statusDescricao }}</td>
       <td class="text-right">{{ ped.quantidadeTotal | number: '0.2' }}</td>
       <td class="text-right">{{ ped.valorTotal | currency}}</td>
-      <td><a [routerLink]="['/pedidoscliente/', ped.id]" class="btn btn-primary btn-sm float-right">Detalhe</a> </td>
-      <td>
-        <a class="remove-item" (click)="alterarStatus(ped.id,1)"><i class="fa fa-check"></i></a>
-      </td>
+      <td><a [routerLink]="['/pedido', ped.id]" class="btn btn-primary btn-sm float-right">Editar</a> </td>
+      <td><a [routerLink]="['/detalhepedido', ped.id]" class="btn btn-primary btn-sm float-right">Itens</a> </td>
     </tr>
   </tbody>
 </table>

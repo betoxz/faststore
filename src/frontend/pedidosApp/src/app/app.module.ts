@@ -13,6 +13,8 @@ import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { DetalhepedidoComponent } from './pages/detalhepedido/detalhepedido.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { PedidoComponent } from './pages/pedido/pedido.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -24,13 +26,15 @@ import { FooterComponent } from './components/footer/footer.component';
     PedidosComponent,
     DetalhepedidoComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    PedidoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

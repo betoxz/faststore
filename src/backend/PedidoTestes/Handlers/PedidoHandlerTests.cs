@@ -1,12 +1,16 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Pedidos.Domain.LojaContexto.Commands.PedidoCommands.InPuts;
 using Pedidos.Domain.LojaContexto.Entidades;
+using Pedidos.Domain.LojaContexto.Enums;
 using Pedidos.Domain.LojaContexto.Handlers;
+using Pedidos.Domain.LojaContexto.Queries;
 using Pedidos.Infra.LojaContexto.DataContexts;
 using Pedidos.Infra.LojaContexto.Repositorios;
 using PedidoTestes.Mocs;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace PedidoTestes.Handlers
@@ -14,9 +18,21 @@ namespace PedidoTestes.Handlers
     [TestClass]
     public class PedidoHandlerTests
     {
+
         [TestMethod]
         public void DeveAlterarStatusPedido()
         {
+            List<ListStatusQueryResult> enums = ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).Select(c => new ListStatusQueryResult() { Chave = (int)c, Valor = c.ToString() }).ToList();
+
+            // A list of Names only, does away with the need of EnumModel 
+            List<string> MyNames = ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).Select(c => c.ToString()).ToList();
+
+            // A list of Values only, does away with the need of EnumModel 
+            List<int> myValues = ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).Select(c => (int)c).ToList();
+
+            // A dictionnary of <string,int>
+            Dictionary<string, int> myDic = ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).ToDictionary(k => k.ToString(), v => (int)v);
+
 
             var ctx = new DataContext();
 

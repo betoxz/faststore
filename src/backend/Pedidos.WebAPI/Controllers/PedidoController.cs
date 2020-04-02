@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pedidos.Domain.LojaContexto.Commands.PedidoCommands.InPuts;
 using Pedidos.Domain.LojaContexto.Commands.PedidoCommands.OutPuts;
+using Pedidos.Domain.LojaContexto.Enums;
 using Pedidos.Domain.LojaContexto.Handlers;
 using Pedidos.Domain.LojaContexto.Queries;
 using Pedidos.Domain.LojaContexto.Repositorios;
 using Pedidos.Shared.Commands;
+using System;
 using System.Collections.Generic;
 
 namespace Pedidos.WebAPI.Controllers
@@ -41,12 +43,19 @@ namespace Pedidos.WebAPI.Controllers
             return _repositorio.GetItensPedido(id);
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("v1/pedido")]
         public ICommandResult Post([FromBody]AlteraStatusPedidoCommand command)
         {
             var result = (AlteraStatusPedidoCommandResult)_handler.Handle(command);
             return result;
         }
+
+        [HttpGet]
+        [Route("v1/status")]
+        public Dictionary<string, int> GetStatus()
+        {
+            return new ListStatusQueryResult().Status;
+        }        
     }
 }

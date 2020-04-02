@@ -1,3 +1,42 @@
-<app-card>
+<div>
+  <h1>
     <p>Detalhe Pedido</p>
-</app-card>
+  </h1>
+
+  <div *ngFor="let ped of (pedido$ | async)">
+    <div class="form-group">
+      <label>Cliente</label>
+      <input type="text" value="{{ped.cliente}}" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label>Quantidade Total</label>
+      <input type="text" class="form-control" value="{{ped.quantidadeTotal}}" readonly>
+    </div>
+    <div class="form-group">
+      <label>ValorTotal</label>
+      <input type="text" value="{{ped.valorTotal}}" class="form-control" readonly>
+    </div>
+    <div class="form-group">
+      <label>Status</label>
+      <input type="text" value="{{ped.statusDescricao}}" class="form-control" readonly>
+    </div>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label>Status</label>
+        <select formControlName="status" class="form-control">
+          <option *ngFor="let status of listaStatus" [ngValue]="ped" [selected]="status.id==ped.status"
+            value={{status.id}}>
+            {{status.descricao}}
+          </option>
+        </select>
+
+      </div>
+      <button (click)="salvar()" type="button"><i class="fa fa-save"></i>
+        Salvar</button>
+      <p class="text-right">
+      </p>
+    </form>
+    <br>
+    <a [routerLink]="['/pedidos']" class="btn btn-primary btn-sm float-right">Voltar</a>
+  </div>
+</div>

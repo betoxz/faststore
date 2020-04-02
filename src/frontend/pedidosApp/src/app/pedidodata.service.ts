@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Pedido } from '../models/pedido';
+import { Status } from '../models/status';
+import { Item } from '../models/itens';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,34 @@ export class PedidoDataService {
         catchError(this.errorHandler)
       );
   }
+
+  getPedidoItens(id): Observable<Item[]> {
+    return this.http.get<Item[]>(`${this.baseUrl}/v1/pedidos/${id}/itens`)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandler)
+      );
+  }
+
+  public getStatus() {
+    return this.http.get(`${this.baseUrl}/Pedido/v1/status`);
+  }
+
+
+  update(data): Observable<Pedido> {
+    return this.http.put<Pedido>(`${this.baseUrl}/Pedido/v1/pedido`, JSON.stringify(data), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+
+  /*
+  public markAsDone(data) {
+    return this.http.put(`${this.baseUrl}/v1/todos/mark-as-done`, data });
+  }
+
+  */
 
   errorHandler(error) {
     let errorMessage = '';

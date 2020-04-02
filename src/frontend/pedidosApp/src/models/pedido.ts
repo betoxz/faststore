@@ -6,4 +6,5 @@ export interface Pedido {
     Cliente: string;
     quantidadeTotal: number;
     valorTotal: number;
+    statusDescricao: string;
 }
