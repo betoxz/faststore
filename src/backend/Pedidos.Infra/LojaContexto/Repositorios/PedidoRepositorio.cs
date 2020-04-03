@@ -26,7 +26,15 @@ namespace Pedidos.Infra.LojaContexto.Repositorios
             return
                 _context
                 .Connection
-                .Query<ListPedidoQueryResult>(@" Select C.Id, Id_Cliente as IdCliente , CreateAt CriadoEm,Status, C.Nome as Cliente, 0 QuantidadeTotal, 0 ValorTotal
+                .Query<ListPedidoQueryResult>(@" Select C.Id, Id_Cliente as IdCliente , CreateAt CriadoEm,Status, C.Nome as Cliente, 
+                                                (Select Sum(Quantidade)
+                                                FROM ItensPedido 
+                                                Where Id_Pedido = @Id) as QuantidadeTotal
+                                                ,
+                                                (Select Sum(Preco * Quantidade)
+                                                FROM ItensPedido 
+                                                Where Id_Pedido = @Id) as ValorTotal
+
                                                 FROM Pedidos P
                                                 INNER JOIN Clientes C
                                                 On C.Id = P.id_Cliente
@@ -59,7 +67,14 @@ namespace Pedidos.Infra.LojaContexto.Repositorios
             return
              _context
              .Connection
-             .Query<ListPedidoQueryResult>(@" Select C.Id, Id_Cliente as IdCliente , CreateAt CriadoEm,Status, C.Nome as Cliente, 0 QuantidadeTotal, 0 ValorTotal
+             .Query<ListPedidoQueryResult>(@" Select C.Id, Id_Cliente as IdCliente , CreateAt CriadoEm,Status, C.Nome as Cliente, 
+                                                (Select Sum(Quantidade)
+                                                FROM ItensPedido 
+                                                Where Id_Pedido = P.Id) as QuantidadeTotal
+                                                ,
+                                                (Select Sum(Preco * Quantidade)
+                                                FROM ItensPedido 
+                                                Where Id_Pedido = P.Id) as ValorTotal
                                                 FROM Pedidos P
                                                 INNER JOIN Clientes C
                                                 On C.Id = P.id_Cliente ", new { });
