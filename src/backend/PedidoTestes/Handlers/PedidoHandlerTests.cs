@@ -22,7 +22,7 @@ namespace PedidoTestes.Handlers
         [TestMethod]
         public void DeveAlterarStatusPedido()
         {
-            List<ListStatusQueryResult> enums = ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).Select(c => new ListStatusQueryResult() { Chave = (int)c, Valor = c.ToString() }).ToList();
+            //List<ListStatusQueryResult> enums = ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).Select(c => new ListStatusQueryResult() { Chave = c.ToString(), Valor = (int)c  }).ToList();
 
             // A list of Names only, does away with the need of EnumModel 
             List<string> MyNames = ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).Select(c => c.ToString()).ToList();

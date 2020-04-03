@@ -1,41 +1,28 @@
-<div>
-  <h1>
-    <p>Detalhe Pedido</p>
-  </h1>
-
-  <div *ngFor="let ped of (pedido$ | async)">
-    <div class="form-group">
-      <label>Cliente</label>
-      <input type="text" value="{{ped.cliente}}" class="form-control" readonly>
-    </div>
-    <div class="form-group">
-      <label>Quantidade Total</label>
-      <input type="text" class="form-control" value="{{ped.quantidadeTotal}}" readonly>
-    </div>
-    <div class="form-group">
-      <label>ValorTotal</label>
-      <input type="text" value="{{ped.valorTotal}}" class="form-control" readonly>
-    </div>
-    <div class="form-group">
-      <label>Status</label>
-      <input type="text" value="{{ped.statusDescricao}}" class="form-control" readonly>
-    </div>
-    <form [formGroup]="form">
-      <div class="form-group">
-        <label>Status</label>
-        <select formControlName="status" class="form-control">
-          <option *ngFor="let status of listaStatus" value={{status.id}}>
-            {{status.descricao}}
-          </option>
-        </select>
-
-      </div>
-      <button (click)="salvar()" type="button"><i class="fa fa-save"></i>
-        Salvar</button>
-      <p class="text-right">
-      </p>
-    </form>
-    <br>
-    <a [routerLink]="['/pedidos']" class="btn btn-primary btn-sm float-right">Voltar</a>
-  </div>
-</div>
+<h1>Lista de Itens</h1>
+<table class="table table-sm table-hover" *ngIf="(itens$ | async)?.length> 0 ">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Descrição</th>
+      <th class="text-right">Quantidade</th>
+      <th class="text-right">Preco</th>
+      <th class="text-right">Total</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td class="text-right" colspan="5">Total do Pedido: {{TotalPedido | currency}}</td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr *ngFor="let item of (itens$ | async); let i = index;">
+      <td>{{(i+1) | number: '3.'}}</td>
+      <td>{{ item.descricao }}</td>
+      <td class="text-right">{{ item.quantidade | number: '0.2' }}</td>
+      <td class="text-right">{{ item.preco | currency}}</td>
+      <td class="text-right">{{ item.total | currency}}</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<a [routerLink]="['/pedidos']" class="btn btn-primary btn-sm float-right">Voltar</a>

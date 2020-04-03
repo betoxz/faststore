@@ -20,7 +20,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let ped of (pedidos$ | async)">
-      <td>{{ ped.id }}</td>
+      <td>{{ ped.id | number: '3.' }}</td>
       <td>{{ ped.cliente }}</td>
       <td>{{ ped.criadoEm | date: 'dd/MM/yyyy' }}</td>
       <td class="text-center">{{ ped.statusDescricao }}</td>

@@ -39,15 +39,19 @@ export class PedidoDataService {
   }
 
   getPedidoItens(id): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.baseUrl}/v1/pedidos/${id}/itens`)
+    return this.http.get<Item[]>(`${this.baseUrl}/Pedido/v1/pedidos/${id}/itens`)
       .pipe(
         retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  public getStatus() {
-    return this.http.get(`${this.baseUrl}/Pedido/v1/status`);
+  getStatus(): Observable<Status[]> {
+    return this.http.get<Status[]>(`${this.baseUrl}/Pedido/v1/status`)
+      .pipe(
+        retry(1),
+        catchError(this.errorHandler)
+      );
   }
 
 

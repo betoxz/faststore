@@ -18,6 +18,8 @@ export class DetalhepedidoComponent implements OnInit {
   public itens$: Observable<Item[]>;
   public form: FormGroup;
   public listaStatus: Status[] = null;
+  public listaStatus$: Observable<Status[]>;
+  public TotalPedido: number = 0;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,17 +44,19 @@ export class DetalhepedidoComponent implements OnInit {
 
     this.pedido$ = this.service.getPedido(this.activatedRoute.snapshot.params.id);
     this.itens$ = this.service.getPedidoItens(this.activatedRoute.snapshot.params.id);
-    this.listaStatus = this.getStatus();
     this.setDefaultValues();
+    this.getTotalPedido();
   }
 
-  getStatus() {
-    return [
-      new Status(1, 'Aguardando'),
-      new Status(2, 'Enviado'),
-      new Status(3, 'Entregue'),
-      new Status(4, 'Cancelado'),
-    ];
+  getTotalPedido(): number {
+    this.itens$.subscribe(res => {
+      if (res) {
+        this.TotalPedido = res.reduce((sum, pedido) => {
+          return sum + pedido.total;
+        }, 0);
+      }
+    });
+    return this.TotalPedido;
   }
 
   salvar(): void {

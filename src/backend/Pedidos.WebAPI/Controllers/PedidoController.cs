@@ -8,6 +8,7 @@ using Pedidos.Domain.LojaContexto.Repositorios;
 using Pedidos.Shared.Commands;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Pedidos.WebAPI.Controllers
 {
@@ -53,9 +54,9 @@ namespace Pedidos.WebAPI.Controllers
 
         [HttpGet]
         [Route("v1/status")]
-        public Dictionary<string, int> GetStatus()
+        public IEnumerable<ListStatusQueryResult> GetStatus()
         {
-            return new ListStatusQueryResult().Status;
-        }        
+            return ((EnumPedidoStatus[])Enum.GetValues(typeof(EnumPedidoStatus))).Select(c => new ListStatusQueryResult() { id = (int)c, descricao = c.ToString() }).ToList();
+        }
     }
 }
