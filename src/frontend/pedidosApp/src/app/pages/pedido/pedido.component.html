@@ -1,35 +1,32 @@
-<div>
   <h1>
     <p>Detalhe Pedido</p>
   </h1>
   <div *ngFor="let ped of (pedido$ | async)">
-    <div class="form-group">
-      <label>Cliente</label>
-      <input type="text" value="{{ped.cliente}}" class="form-control" readonly>
-    </div>
-    <div class="form-group">
-      <label>Quantidade Total</label>
-      <input type="text" class="form-control" value="{{ped.quantidadeTotal}}" readonly>
-    </div>
-    <div class="form-group">
-      <label>ValorTotal</label>
-      <input type="text" value="{{ped.valorTotal}}" class="form-control" readonly>
-    </div>
-    <div class="form-group">
-      <label>Status</label>
-      <input type="text" value="{{ped.statusDescricao}}" class="form-control" readonly>
-    </div>
     <form [formGroup]="form">
-      <div class="form-group">
-        <label>Status</label>
-        <select formControlName="status" class="form-control">
-
-          <option *ngFor="let status of listaStatus" value={{status.id}}>
-            {{status.descricao}}
-          </option>
-        </select>
-
-      </div>
+      <ul class="form-group list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <label>Nome</label>
+          <span class="badge badge-primary badge-pill">{{ped.cliente}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <label>Quantidade Total</label>
+          <span class="badge badge-primary badge-pill">{{ped.quantidadeTotal| number: '0.2'}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <label>ValorTotal</label>
+          <span class="badge badge-primary badge-pill">{{ped.valorTotal| currency}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <label>Status</label>
+          <span class="badge badge-primary badge-pill">
+            <select formControlName="status" class="badge badge-primary badge-pill">
+              <option *ngFor="let status of listaStatus" value={{status.id}}>
+                {{status.descricao}}
+              </option>
+            </select>
+          </span>
+        </li>
+      </ul>
       <button (click)="salvar()" type="button"><i class="fa fa-save"></i>
         Salvar</button>
       <p class="text-right">
@@ -38,4 +35,3 @@
     <br>
     <a [routerLink]="['/pedidos']" class="btn btn-primary btn-sm float-right">Voltar</a>
   </div>
-</div>
